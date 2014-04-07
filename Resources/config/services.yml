@@ -1,0 +1,4 @@
+services:
+  datatable_manager:
+    class: Hype\DyanmicDatatablesBundle\Datatables\DatatableManager
+    arguments: ["@twig"]

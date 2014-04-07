@@ -1,0 +1,19 @@
+{# Datatable action template #}
+<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+    {% for action in actions %}
+        {% if action.type is defined %}
+            <a href="{{ data.url }}" {% if action.title %}title="{{ action.title }}"{% endif %}
+               class="btn btn-xs btn-primary" target="_blank">
+                <i class="icon-eye-open bigger-120"></i></a>
+        {% else %}
+            <a href="{{ path(action.route, {'id':id}) }}" {% if action.title %}title="{{ action.title }}"{% endif %}
+               class="btn btn-xs {% if action.class is defined %}{{ action.class }}{% endif %}"
+            {% if action.attrs is defined %}
+                {% for attr,value in action.attrs %}
+                    {{ attr }}="{{ value }}"
+                {% endfor %}
+            {% endif %}>
+            <i class="{% if action.icon is defined %}{{ action.icon }}{% endif %} bigger-120"></i></a>
+        {% endif %}
+    {% endfor %}
+</div>

@@ -1,0 +1,36 @@
+{
+    "name": "ahmedsamy/dyanmic-datatables-bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "description": "Datatable plugin",
+    "homepage": "https://github.com/AhmedSamy/DynamicDataTablesBundle",
+    "keywords": ["datatables","jquery","doctrine","dynamic", "datagrid"],
+    "authors": [
+        {
+            "name": "Ahmed Samy",
+            "email": "ahmed.samy.cs@gmail.com",
+            "homepage":"http://www.ahmed-samy.com",
+            "role":"Developer"
+        },
+        {
+            "name": "Ahmed Maged",
+            "email": "ahmaaadmaged@gmail.com",
+            "homepage":"https://github.com/ahmed-maged",
+            "role":"Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Hype\\DynamicDatatablesBundle": "" }
+    },
+    "target-dir": "Hype/DynamicDatatables",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.*"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "dev-master"
+        }
+    }
+}
