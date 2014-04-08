@@ -5,7 +5,10 @@ namespace Hype\DynamicDatatablesBundle\Datatables;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use Ma7shy\BackendBundle\Exception\DatatableException;
+use Hype\DynamicDatatablesBundle\Datatables\DatatableException;
+use Symfony\Bridge\Monolog\Logger;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException,
+    Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
 class DatatableManager
 {
@@ -13,7 +16,7 @@ class DatatableManager
     protected $twig;
     protected $dataSource;
     protected $actionTemplate = 'HypeDynamicDatatablesBundle::datatableAction.html.twig';
-    /* @var $logger \Symfony\Bridge\Monolog\Logger */
+    /* @var $logger Logger */
     protected $logger = null;
 
     private $columns = array();
@@ -63,7 +66,7 @@ class DatatableManager
      * @param $callback
      *
      * @return $this
-     * @throws \Ma7shy\BackendBundle\Exception\DatatableException
+     * @throws DatatableException
      */
     public function editColumn($col, $callback)
     {
@@ -243,27 +246,26 @@ class DatatableManager
     /**
      *
      * @return DocumentRepository
-     * @throws \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+     * @throws ServiceNotFoundException
      */
     public function getDataSource()
     {
         if (!isset($this->dataSource)) {
-            throw new \Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException('Data provider is not defined, you have to set dataprovider first ');
+            throw new ServiceNotFoundException('Data provider is not defined, you have to set dataprovider first ');
         }
 
         return $this->dataSource;
     }
 
-    public function setLogger(
-        \Symfony\Bridge\Monolog\Logger $logger
-    ) {
+    public function setLogger(Logger $logger)
+    {
         $this->logger = $logger;
     }
 
     private function getLogger()
     {
         if ($this->logger == null) {
-            throw new \Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException('Logger Service is not set please use setLogger on' . __CLASS__);
+            throw new ServiceUnavailableHttpException('Logger Service is not set please use setLogger on' . __CLASS__);
         }
 
         return $this->logger;
