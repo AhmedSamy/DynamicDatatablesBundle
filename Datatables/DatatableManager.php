@@ -12,7 +12,7 @@ class DatatableManager
 
     protected $twig;
     protected $dataSource;
-    protected $actionTemplate = 'DynamicDatatablesBundle:datatableAction.html.twig';
+    protected $actionTemplate = 'HypeDynamicDatatablesBundle::datatableAction.html.twig';
     /* @var $logger \Symfony\Bridge\Monolog\Logger */
     protected $logger = null;
 
