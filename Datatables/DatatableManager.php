@@ -5,7 +5,7 @@ namespace Hype\DynamicDatatablesBundle\Datatables;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use Ma7shy\BackendBundle\Exception\DatatableException;
+use Hype\DynamicDatatablesBundle\Datatables\DatatableException;
 
 class DatatableManager
 {
@@ -63,7 +63,7 @@ class DatatableManager
      * @param $callback
      *
      * @return $this
-     * @throws \Ma7shy\BackendBundle\Exception\DatatableException
+     * @throws DatatableException
      */
     public function editColumn($col, $callback)
     {
