@@ -1,5 +1,5 @@
 {
-    "name": "ahmedsamy/dyanmic-datatables-bundle",
+    "name": "ahmedsamy/dynamic-datatables-bundle",
     "license": "MIT",
     "type": "symfony-bundle",
     "description": "Datatable plugin",

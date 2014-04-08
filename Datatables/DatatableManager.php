@@ -1,6 +1,6 @@
 <?php
 
-namespace Hype\DyanmicDatatablesBundle\Datatables;
+namespace Hype\DynamicDatatablesBundle\Datatables;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectRepository;

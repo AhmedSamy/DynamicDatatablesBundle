@@ -1,6 +1,6 @@
 <?php
 
-namespace Hype\DyanmicDatatablesBundle\Datatables;
+namespace Hype\DynamicDatatablesBundle\Datatables;
 
 
 class DatatableExcpetion extends \Exception
