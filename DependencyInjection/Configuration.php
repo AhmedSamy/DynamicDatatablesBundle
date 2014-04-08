@@ -17,12 +17,6 @@ class Configuration implements ConfigurationInterface {
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
 
-        $rootNode->children()
-                    ->scalarNode('api_key')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('default_list')->isRequired()->cannotBeEmpty()->end()
-                    ->booleanNode('ssl')->defaultTrue()->end()
-                    ->integerNode('timeout')->defaultValue(20)->end()
-                  ->end();
 
         return $treeBuilder;
     }
