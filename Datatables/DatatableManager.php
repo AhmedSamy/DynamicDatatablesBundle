@@ -113,6 +113,10 @@ class DatatableManager
                 }
             }
         }
+
+        /* Data set length after filtering */
+        $iFilteredTotal = $cb->getQuery()->count();
+
         if (isset($get['iDisplayStart']) && $get['iDisplayLength'] != '-1') {
             $cb->limit((int)$get['iDisplayLength']);
             $cb->skip($get['iDisplayStart']);
@@ -135,9 +139,6 @@ class DatatableManager
          */
         $query   = $cb->hydrate(false)->getQuery();
         $rResult = $query->execute()->toArray();
-
-        /* Data set length after filtering */
-        $iFilteredTotal = count($rResult);
 
         /* Total data set length */
         $iTotal = $query->count();
