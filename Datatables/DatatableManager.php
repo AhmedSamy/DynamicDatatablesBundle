@@ -226,7 +226,7 @@ class DatatableManager
                     return $cell->count();
                 }
                 if (is_bool($cell)) {
-                    return $cell === 1;
+                    return $cell;
                 }
             }
 
