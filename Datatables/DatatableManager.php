@@ -10,7 +10,6 @@ use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException,
     Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
-
 class DatatableManager
 {
 
@@ -76,10 +75,12 @@ class DatatableManager
         }
 
         if (!in_array($col, $this->columns)) {
-            throw new DatatableException(sprintf(
-                "col with name %s is not found, have you forget to set columns ?",
-                $col
-            ));
+            throw new DatatableException(
+                sprintf(
+                    "col with name %s is not found, have you forget to set columns ?",
+                    $col
+                )
+            );
         }
 
         $this->editColumns[$col] = $callback;
@@ -98,7 +99,7 @@ class DatatableManager
      */
     public function datatable($get, $actionData, $aColumns = null)
     {
-        $cb            = $this->getDataSource()->createQueryBuilder();
+        $cb = $this->getDataSource()->createQueryBuilder();
         $searchKeyword = $get['sSearch'];
         if (!isset($aColumns)) {
             $aColumns = $this->columns;
@@ -108,8 +109,10 @@ class DatatableManager
         }
         if (isset($searchKeyword) and $searchKeyword != '') {
             foreach ($aColumns as $column) {
-                if ($column != '_id') {
-                    $cb->addOr($cb->expr()->field($column)->equals(new \MongoRegex('/.*' . $searchKeyword . '.*/i')));
+                if ($column == '_id') {
+                    $cb->addOr($cb->expr()->field($column)->equals((int)$searchKeyword));
+                } else {
+                    $cb->addOr($cb->expr()->field($column)->equals(new \MongoRegex('/.*'.$searchKeyword.'.*/i')));
                 }
             }
         }
@@ -127,8 +130,8 @@ class DatatableManager
         $orderedColumns = $this->getOrderedColumns();
         if (isset($get['iSortCol_0'])) {
             for ($i = 0; $i < intval($get['iSortingCols']); $i++) {
-                if ($get['bSortable_' . intval($get['iSortCol_' . $i])] == "true") {
-                    $cb->sort($orderedColumns[(int)$get['iSortCol_' . $i]], $get['sSortDir_' . $i]);
+                if ($get['bSortable_'.intval($get['iSortCol_'.$i])] == "true") {
+                    $cb->sort($orderedColumns[(int)$get['iSortCol_'.$i]], $get['sSortDir_'.$i]);
                 }
             }
         }
@@ -137,12 +140,11 @@ class DatatableManager
          * SQL queries
          * Get data to display
          */
-        $query   = $cb->hydrate(false)->getQuery();
+        $query = $cb->hydrate(false)->getQuery();
         $rResult = $query->execute()->toArray();
 
         /* Total data set length */
         $iTotal = $query->count();
-
 
         /*
          * Output
@@ -175,7 +177,7 @@ class DatatableManager
                 }
             }
 
-            $row[]              = $this->renderActions($aRow, $actionData);
+            $row[] = $this->renderActions($aRow, $actionData);
             $output['aaData'][] = $row;
         }
 
@@ -267,7 +269,7 @@ class DatatableManager
     private function getLogger()
     {
         if ($this->logger == null) {
-            throw new ServiceUnavailableHttpException('Logger Service is not set please use setLogger on' . __CLASS__);
+            throw new ServiceUnavailableHttpException('Logger Service is not set please use setLogger on'.__CLASS__);
         }
 
         return $this->logger;
